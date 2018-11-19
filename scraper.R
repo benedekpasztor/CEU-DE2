@@ -15,7 +15,7 @@ url <- 'https://fivethirtyeight.com/features/the-16-races-still-too-close-to-cal
 webpage <- read_html(url)
 
 #Using CSS selectors to scrap the text related to the news article
-#text_data_html <- html_nodes(webpage,'<<PUT THE CSS SELECTION HERE>>')
+text_data_html <- html_nodes(webpage,'li:nth-child(7) , .single-post-content p , li:nth-child(9)')
 text_data_html <- html_nodes(webpage,'.__reader_view_article_wrap_8724363608561669__ , p:nth-child(7) , #framediv4+ p , p:nth-child(3)')
 
 #Converting to text

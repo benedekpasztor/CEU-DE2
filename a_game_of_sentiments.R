@@ -1,9 +1,12 @@
+rm(list=ls())
+
 ############################# A Game of Sentiments ##########################
+
 
 ############################# Setup Your Key ###############################
 
 #my keys
-keyTable <- read.csv("~/Downloads/accessKeysOregon.csv", header = T)
+keyTable <- read.csv("accessKeys.csv", header = T)
 AWS_ACCESS_KEY_ID <- as.character(keyTable$Access.key.ID)
 AWS_SECRET_ACCESS_KEY <- as.character(keyTable$Secret.access.key)
 
@@ -12,6 +15,8 @@ Sys.setenv("AWS_ACCESS_KEY_ID" = AWS_ACCESS_KEY_ID,
            "AWS_SECRET_ACCESS_KEY" = AWS_SECRET_ACCESS_KEY,
            "AWS_DEFAULT_REGION" = "us-west-2") 
 ############################################################################
+
+install.packages("aws.comprehend", repos = c(cloudyr = "http://cloudyr.github.io/drat", getOption("repos")))
 
 library(aws.comprehend)
 library(dplyr)
@@ -55,7 +60,14 @@ data_frame(positive_vector, negative_vector, sentiment_vector) %>%
 
 # TO DO: Find a better way to make the dataframe:
 
+a <- NULL
+for (i in 1:length(short_story)) {   # for each element in the story do the following
+  if (short_story[i] > "") {         # but only if this condition is met
+    df <- detect_sentiment(short_story[i])  # get the sentiment 
+    a <- rbind(a, df)
+   } 
+}
 
-
+a
 
 ################################# end of A Game of Sentiments ######################

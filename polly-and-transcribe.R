@@ -12,20 +12,20 @@ AWS_SECRET_ACCESS_KEY <- as.character(keyTable$Secret.access.key)
 #activate
 Sys.setenv("AWS_ACCESS_KEY_ID" = AWS_ACCESS_KEY_ID,
            "AWS_SECRET_ACCESS_KEY" = AWS_SECRET_ACCESS_KEY,
-           "AWS_DEFAULT_REGION" = "us-west-2") 
+           "AWS_DEFAULT_REGION" = "us-east-1") 
 
-#> install.packages("TuneR")
+install.packages("tuneR")
 
 ### AWS POLLY ===========================================
-#> install.packages("aws.polly", repos = c(getOption("repos"), "http://cloudyr.github.io/drat"))
+install.packages("aws.polly", repos = c(getOption("repos"), "http://cloudyr.github.io/drat"))
 
-library("aws.polly")
-library("tuneR")
+library(aws.polly)
+library(tuneR)
 
 # list available voices
 list_voices()
 
-vec <- synthesize("Hello world!", voice = "Joanna")
+vec <- synthesize("Hahahahahaha", voice = "Joanna")
 # On a mac, set the player with the following line: "https://stackoverflow.com/questions/23310005/permission-denied-when-playing-wav-file"
 # setWavPlayer('/usr/bin/afplay')
 play(vec)
@@ -33,10 +33,10 @@ play(vec)
 ### AWS TRANSCRIBE =====================================
 
 # install latest stable version
-#> install.packages("aws.transcribe", repos = c(cloudyr = "http://cloudyr.github.io/drat", getOption("repos")))
+install.packages("aws.transcribe", repos = c(cloudyr = "http://cloudyr.github.io/drat", getOption("repos")))
 
-library("aws.transcribe")
-t1 <- start_transcription("example-4", "https://s3.amazonaws.com/randhunt-transcribe-demo-us-east-1/out.mp3")
+library(aws.transcribe)
+t1 <- start_transcription("pasztor_benedek-now", "https://s3.amazonaws.com/randhunt-transcribe-demo-us-east-1/out.mp3")
 transcript <- get_transcription("example-4")
 cat(strwrap(transcript$Transcriptions[1L], 60), sep = "\n")
 

@@ -3,25 +3,27 @@ sessionInfo() # this will list down the libraries you have in your environment
 ################################ Setup Your Keys ################################
 
 #my keys
-keyTable <- read.csv("accessKey.csv", header = T)
+keyTable <- read.csv("accessKeys.csv", header = T)
 AWS_ACCESS_KEY_ID <- as.character(keyTable$Access.key.ID)
 AWS_SECRET_ACCESS_KEY <- as.character(keyTable$Secret.access.key)
 
 #activate
 Sys.setenv("AWS_ACCESS_KEY_ID" = AWS_ACCESS_KEY_ID,
            "AWS_SECRET_ACCESS_KEY" = AWS_SECRET_ACCESS_KEY,
-           "AWS_DEFAULT_REGION" = "us-west-2") 
+           "AWS_DEFAULT_REGION" = "eu-west-2") 
 
 ########################### S3 Interraction with R #############################
 #> OSX: install.packages("aws.s3", repos = c("cloudyr" = "http://cloudyr.github.io/drat"))
-#> Windows: install.packages("aws.s3", repos = c("cloudyr" = "http://cloudyr.github.io/drat"), INSTALL_opts = "--no-multiarch")
+install.packages("aws.s3", repos = c("cloudyr" = "http://cloudyr.github.io/drat"), INSTALL_opts = "--no-multiarch")
+install.packages("xml2")
 
 library(aws.s3)
+library(xml2) # only on Windows
 # i can have a look at my bucket list on s3
 bucketlist()
 
 #Make a unique s3 bucket name
-my_name <- "ceu-class-"  # type in your name here
+my_name <- "pasztor-benedek"  # type in your name here
 bucket_name <- paste(c(my_name, sample(c(0:3, letters), size = 3, replace = TRUE)), collapse = "")
 print(bucket_name)
 
