@@ -80,6 +80,4 @@ ggplot(data.frame(sentiments), aes(Negative, Positive, label = c("Fox News", "CN
   ylab("Positive sentiments")+
   theme_bg()
   ggsave(paste0(dir, "Trump_CNNFox_Comparison.png"), width=10, height=7.5)
-?geom_text_repel
-(sentiments)
 
